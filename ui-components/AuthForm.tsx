@@ -5,5 +5,10 @@ interface AuthFormProps {}
  *
  */
 export const AuthForm: FC<AuthFormProps> = () => {
-  return <>HI!</>;
+  return (
+    <>
+      <label htmlFor="email">E-mail</label>
+      <input type="text" id="email" name="email" />
+    </>
+  );
 };

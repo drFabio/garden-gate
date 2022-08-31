@@ -1,5 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { screen, userEvent } from "@storybook/testing-library";
 
 import { AuthForm } from "@components/AuthForm";
 
@@ -16,3 +17,13 @@ const Template: ComponentStory<typeof AuthForm> = (args) => (
 );
 
 export const LoggedOut = Template.bind({});
+
+LoggedOut.play = async () => {
+  const emailInput = screen.getByLabelText("E-mail", {
+    selector: "input",
+  });
+
+  await userEvent.type(emailInput, "example-email@email.com", {
+    delay: 100,
+  });
+};
