@@ -12,14 +12,15 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "baseUrl": "./",
-    "paths": {
-      "@components/*": ["ui-components/*"],
-      "@stories/*": ["stories/*"]
-    }
+    "jsx": "react",
+    "incremental": true
   },
+  "testEnvironment": "jsdom",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest",
+    "^.+\\.(t|j)sx$": "ts-jest"
+  },
+  "preset": "ts-jest",
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
