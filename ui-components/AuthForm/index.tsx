@@ -1,16 +1,25 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
+import { LoginWithPassword } from "./LoginWithPassword";
+import { LoginWithPasswordless } from "./LoginWithPasswordless";
 
-interface AuthFormProps {}
+export enum AUTH_STRATEGIES {
+  PASSWORD = "PASSWORD",
+  PASSWORDLESS = "PASSWORDLESS",
+}
+interface AuthFormProps {
+  strategy?: AUTH_STRATEGIES;
+}
 /**
  *
  */
-export const AuthForm: FC<AuthFormProps> = () => {
-  return (
-    <>
-      <label htmlFor="email">E-mail</label>
-      <input type="text" id="email" name="email" required />
-      <label htmlFor="password">Password</label>
-      <input type="password" id="password" name="password" required />
-    </>
-  );
+export const AuthForm: FC<AuthFormProps> = ({
+  strategy = AUTH_STRATEGIES.PASSWORD,
+}) => {
+  switch (strategy) {
+    case AUTH_STRATEGIES.PASSWORDLESS:
+      return <LoginWithPasswordless />;
+    case AUTH_STRATEGIES.PASSWORD:
+    default:
+      return <LoginWithPassword />;
+  }
 };

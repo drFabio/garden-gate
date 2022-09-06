@@ -1,5 +1,10 @@
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
+/**
+ * this is trhowning an error
+ *
+ * @see {@link https://github.com/storybookjs/storybook/issues/18801}
+ */
 module.exports = {
   stories: [
     "../stories/**/*.stories.mdx",

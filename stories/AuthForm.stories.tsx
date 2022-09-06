@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { screen, userEvent } from "@storybook/testing-library";
 
-import { AuthForm } from "@components/AuthForm";
+import { AuthForm, AUTH_STRATEGIES } from "@components/AuthForm";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -15,24 +15,47 @@ export default {
 const Template: ComponentStory<typeof AuthForm> = (args) => (
   <AuthForm {...args} />
 );
+/**
+ * The basic component
+ */
 export const Standard = Template.bind({});
+Standard.args = {
+  strategy: AUTH_STRATEGIES.PASSWORD,
+};
 
 export const LoggingIn = Template.bind({});
+LoggingIn.args = {
+  strategy: AUTH_STRATEGIES.PASSWORD,
+};
 
-LoggingIn.play = async () => {
-  const emailInput = screen.getByLabelText("E-mail", {
-    selector: "input",
-  });
+LoggingIn.play = async ({ args, canvasElement }) => {
+  const fillEmail = async () => {
+    const emailInput = screen.getByLabelText("E-mail", {
+      selector: "input",
+    });
 
-  await userEvent.type(emailInput, "example-email@email.com", {
-    delay: 100,
-  });
+    await userEvent.type(emailInput, "example-email@email.com", {
+      delay: 100,
+    });
+  };
+  switch (args.strategy) {
+    case AUTH_STRATEGIES.PASSWORD:
+      {
+        await fillEmail();
 
-  const passwordInput = screen.getByLabelText("Password", {
-    selector: "input",
-  });
+        const passwordInput = screen.getByLabelText("Password", {
+          selector: "input",
+        });
 
-  await userEvent.type(passwordInput, "secret", {
-    delay: 100,
-  });
+        await userEvent.type(passwordInput, "secret", {
+          delay: 100,
+        });
+      }
+      break;
+    case AUTH_STRATEGIES.PASSWORDLESS:
+      {
+        await fillEmail();
+      }
+      break;
+  }
 };
