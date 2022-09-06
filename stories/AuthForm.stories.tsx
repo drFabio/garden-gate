@@ -15,15 +15,24 @@ export default {
 const Template: ComponentStory<typeof AuthForm> = (args) => (
   <AuthForm {...args} />
 );
+export const Standard = Template.bind({});
 
-export const LoggedOut = Template.bind({});
+export const LoggingIn = Template.bind({});
 
-LoggedOut.play = async () => {
+LoggingIn.play = async () => {
   const emailInput = screen.getByLabelText("E-mail", {
     selector: "input",
   });
 
   await userEvent.type(emailInput, "example-email@email.com", {
+    delay: 100,
+  });
+
+  const passwordInput = screen.getByLabelText("Password", {
+    selector: "input",
+  });
+
+  await userEvent.type(passwordInput, "secret", {
     delay: 100,
   });
 };

@@ -8,7 +8,9 @@ export const AuthForm: FC<AuthFormProps> = () => {
   return (
     <>
       <label htmlFor="email">E-mail</label>
-      <input type="text" id="email" name="email" />
+      <input type="text" id="email" name="email" required />
+      <label htmlFor="password">Password</label>
+      <input type="password" id="password" name="password" required />
     </>
   );
 };
