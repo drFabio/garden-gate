@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import Account from "@components/Account";
+import { AppList } from "@components/AppList";
 
 const Home: NextPage = () => {
   const session = useSession();
@@ -19,7 +20,10 @@ const Home: NextPage = () => {
           providers={["google"]}
         />
       ) : (
-        <Account session={session} />
+        <>
+          <AppList />
+          <Account session={session} />
+        </>
       )}
     </div>
   );
