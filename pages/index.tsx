@@ -10,6 +10,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="container" style={{ padding: "50px 0 100px 0" }}>
+      <h3>{process.env.NEXT_PUBLIC_SITE_URL}</h3>
       {!session ? (
         <Auth
           supabaseClient={supabase}
