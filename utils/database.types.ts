@@ -9,6 +9,20 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      apps: {
+        Row: {
+          id: string
+          name: string
+        }
+        Insert: {
+          id?: string
+          name: string
+        }
+        Update: {
+          id?: string
+          name?: string
+        }
+      }
       profiles: {
         Row: {
           id: string
@@ -44,5 +58,3 @@ export interface Database {
     }
   }
 }
-
-Done in 2.51s.
