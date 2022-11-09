@@ -1,4 +1,3 @@
-import { AuthForm, AUTH_STRATEGIES } from "@components/AuthForm";
 import type { NextPage } from "next";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
@@ -18,6 +17,7 @@ const Home: NextPage = () => {
           theme="dark"
           magicLink
           providers={["google"]}
+          redirectTo={process.env.NEXT_PUBLIC_SITE_URL}
         />
       ) : (
         <>
