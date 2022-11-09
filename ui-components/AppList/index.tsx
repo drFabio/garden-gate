@@ -2,26 +2,29 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import { Database } from "../../utils/database.types";
 
+type App = Database["public"]["Tables"]["apps"]["Row"];
+
 export const AppList = () => {
   const supabase = useSupabaseClient<Database>();
-  const [apps, setApps] = useState<string>();
+  const [apps, setApps] = useState<App[]>([]);
   useEffect(() => {
     const getData = async () => {
-      const { data, error } = await supabase.from("apps").select();
+      const { data } = await supabase.from("apps").select();
       if (data) {
-        setApps(JSON.stringify(data, null, 4));
+        setApps(data);
       }
-      console.log({ data, error });
     };
     getData();
   }, [setApps]);
 
   return (
-    <>
-      <ul>
+    <ul>
+      <>
         <li>Profile</li>
-      </ul>
-      {apps}
-    </>
+        {apps.map(({ name, id }) => (
+          <li key={id}>{name}</li>
+        ))}
+      </>
+    </ul>
   );
 };
